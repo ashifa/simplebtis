@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>only key start with CMD will be exected.   Only key start with HOST will be queried. </comment>
+<entry key="userName">sdc</entry>
+<entry key="passWord">adw2.0</entry>
+<entry key="prompt">]</entry>
+<entry key="waitingTime">10</entry>
+<entry key="selectedTargetRegion">BJ</entry><!-- Beijing,Hino,MKE -->
+<!--<entry key="CMD_*">CMDxxxxxx|||result MatchPattern </entry> -->
+<entry key="CMD_Install Data">rpm -qi `rpm -qa | grep MrpA`|||(?&lt;=Install Date:).+(?=Build Host)</entry>
+<entry key="CMD_Spt.restults">cat /usr/g/service/log/spt.results|||.*=.*</entry>
+<entry key="11CMD_CORE File">cd /usr/g/service/log/; ls  -1 *core* |||^(?!cd).*(core|CORE).*$</entry>
+<entry key="CMD_ Software Version">testrecord|||.*_\d{4}.*###getver|egrep 'cclass|insite'|||.*_\d{4}.*</entry>
+<entry key="CMD_Mgd_stage">head -1 /w/config/mgd_stage|||^\w*$</entry>
+<entry key="11CMD_Search gesys.log">grep "The device listed below failed to respond in the given time." /usr/g/service/log/gesys_*log |wc |||^.*$</entry>
+<entry key="11CMD_UpmCal1.cfg">cat /w/config/Upm1Cal.cfg|||^\w*$</entry>
+<entry key="11CMD_Optionkey">sok_test |||^.*optima.*INSTALLED.*$</entry>
+<entry key="11CMD_prescan.log">( sleep 0.5;  echo "cat prescan.log | grep 000  " ; sleep 1; ) | rsh vre|||.*000.*</entry>
+<entry key="11CMD_CD-RW">grep CD-ROM /proc/scsi/scsi|||(?&lt;=Type:).*</entry>
+<entry key="CMD_ICN Revision">grep chassis_asset /w/config/vre.cfg|||(?&lt;=icn).*.*</entry>
+<entry key="CMD_OS Version">cat /mr.closure.OS|||(?&lt;=is :).*</entry>
+<!--
+<entry key="CMD_VoxTool Version">cat /export/home/sdc/vxtl/VERSION|||.*_\d{2}.*</entry>
+<entry key="CMD_FuncTool Version">cat /export/home/sdc/MRFctl/VERSION|||\d{1,3}\.\d{1,3}\.\d{1,3}</entry>
+<entry key="CMD_Clariview Version">head -1 /export/home/sdc/clariview2/version/CLARIVIEW_VERSION|||\d{1,3}\.\d{1,3}</entry>
+<entry key="CMD_Terrautil release Version">awk '/nuevo/' /mr.closure.TERRA|||(?&lt;=is :).*</entry>
+<entry key="CMD_DataExport Version"> grep DATAEXPORT /export/home/sdc/release.txt|||(?&lt;=DATAEXPORT=).*</entry>
+<entry key="CMD_CopyComposer Version">grep CSERELEASE_VERSION /export/home/sdc/release.txt|||(?&lt;=CSERELEASE_VERSION=).*</entry>
+<entry key="11CMD_SR Viewer Version ">|||.*</entry>
+<entry key="CMD_Insite/IIP Version">cat /usr/g/insite/VERSION|||.*(?&lt;=Linux)</entry>
+<entry key="CMD_Government body">grep govBody /w/config/MRconfig.cfg|||(?&lt;=govBody =).*</entry>
+<entry key="CMD_ICN number">grep num_of_icns /w/config/vre.cfg|||(?&lt;=icns=).*</entry>
+<entry key="CMD_OS Version">cat /mr.closure.OS|||(?&lt;=is :).*</entry>
+<entry key="CMD_Patch Version">ls / | grep mr.closure.patch | cut -c 12- ; ls / | grep mr.closure.Service |cut -c 12-|||^(p).*</entry>
+<entry key="CMD_ICN Serial Number">hartViewer -c | awk ' /icn1/ { getline; getline; getline; geltine; getline; print $0;}'|||(?&lt;=Serial).*</entry>
+<entry key="CMD_SCP Firmware Revision">hartViewer -c | awk ' /SCP / {getline ; getline ; getline ; print $0 ;}'|||(?&lt;=FirmwareRevision:).*</entry>
+<entry key="11CMD_Installed Option Key">/usr/g/bin/sok_test | grep INSTALLED | cut -f1,2 |||.*</entry>
+-->
+<!--<entry key="HOST_*">XX.XX.XX.XX</entry> -->
+<entry key="HOST_BJ Bay01">3.35.117.204</entry>
+<entry key="HOST_BJ Bay02">3.35.117.207</entry>
+<entry key="HOST_BJ Bay03">3.35.117.201</entry>
+<entry key="HOST_BJ Bay04">3.35.117.197</entry>
+<entry key="HOST_BJ Bay05">3.35.117.194</entry>
+<entry key="HOST_BJ Bay06">3.35.117.199</entry>
+<entry key="HOST_BJ Bay07">3.36.157.241</entry>
+<entry key="HOST_BJ Bay08">3.36.157.177</entry>
+<entry key="HOST_BJ Bay10">3.36.157.179</entry>
+<entry key="HOST_BJ Ivy">3.35.117.178</entry>
+<entry key="HOST_BJ Lavender">3.35.117.159</entry>
+<entry key="HOST_BJ Tulip">3.35.117.219</entry>
+<entry key="HOST_BJ Calla">3.35.117.196</entry>
+<entry key="HOST_BJ Canna">3.35.117.174</entry>
+<entry key="HOST_BJ Gladiola">3.35.117.208</entry>
+<entry key="HOST_BJ Olive">3.35.117.218</entry>
+<entry key="HOST_BJ Rick">3.35.117.203</entry>
+<entry key="HOST_BJ Oak">3.35.117.216</entry>
+<entry key="HOST_BJ Violet">3.35.117.205</entry>
+<entry key="HOST_Hino st01">3.246.249.31</entry>
+<entry key="HOST_Hino st02">3.246.249.32</entry>
+<entry key="HOST_Hino st03">3.246.249.33</entry>
+<entry key="HOST_Hino st04">3.246.249.34</entry>
+<entry key="HOST_Hino st05">3.246.249.35</entry>
+<entry key="HOST_Hino st06">3.246.249.36</entry>
+<entry key="HOST_Hino st07">3.246.249.37</entry>
+<entry key="HOST_Hino Bay01">3.246.249.201</entry>
+<entry key="HOST_Hino Bay02">3.246.249.202</entry>
+<entry key="HOST_Hino Bay03">3.246.249.203</entry>
+<entry key="HOST_Hino Bay04">3.246.249.204</entry>
+<entry key="HOST_Hino Bay05">3.246.249.205</entry>
+<entry key="HOST_Hino Bay06">3.246.249.206</entry>
+<entry key="HOST_Hino Bay07">3.246.249.207</entry>
+<entry key="HOST_Hino Bay08">3.246.249.208</entry>
+<entry key="HOST_Hino Bay09">3.246.249.209</entry>
+<entry key="HOST_Hino tamachan">3.36.9.202</entry>
+<entry key="HOST_Hino hanawa">3.36.9.204</entry>
+<entry key="HOST_Hino maruo">3.36.9.205</entry>
+<entry key="HOST_Hino hamaji">3.36.9.206</entry>
+<entry key="HOST_Hino migiwa">3.36.9.207</entry>
+<entry key="HOST_Hino bootaro">3.36.9.208</entry>
+<entry key="HOST_Hino hidejii_">3.36.9.220</entry>
+<entry key="HOST_MKE T01">3.7.25.1</entry>
+<entry key="HOST_MKE T02">3.7.25.2</entry>
+<entry key="HOST_MKE T03">3.7.25.3</entry>
+<entry key="HOST_MKE T04">3.7.25.4</entry>
+<entry key="HOST_MKE T05">3.7.25.5</entry>
+<entry key="HOST_MKE T06">3.7.25.6</entry>
+<entry key="HOST_MKE T07">3.7.25.7</entry>
+<entry key="HOST_MKE T08">3.7.25.8</entry>
+<entry key="HOST_MKE T09">3.7.25.9</entry>
+<entry key="HOST_MKE T10">3.7.25.10</entry>
+<entry key="HOST_MKE T11">3.7.25.11</entry>
+<entry key="HOST_MKE T12">3.7.25.12</entry>
+<entry key="HOST_MKE T13">3.7.25.13</entry>
+<entry key="HOST_MKE T14">3.7.25.14</entry>
+<entry key="HOST_MKE T15">3.7.25.15</entry>
+<entry key="HOST_MKE T16">3.7.25.16</entry>
+<entry key="HOST_MKE T17">3.7.25.17</entry>
+<entry key="HOST_MKE T18">3.7.25.18</entry>
+<entry key="HOST_MKE T19">3.7.25.19</entry>
+<entry key="HOST_MKE T20">3.7.25.20</entry>
+<entry key="HOST_MKE T21">3.7.25.21</entry>
+<entry key="HOST_MKE T22">3.7.25.22</entry>
+<entry key="HOST_MKE T23">3.7.25.23</entry>
+<entry key="HOST_MKE T24">3.7.25.24</entry>
+<entry key="HOST_MKE T25">3.7.25.25</entry>
+<entry key="HOST_MKE T26">3.7.25.26</entry>
+<entry key="HOST_MKE T27">3.7.25.27</entry>
+<entry key="HOST_MKE T28">3.7.25.28</entry>
+<entry key="HOST_MKE T29">3.7.25.29</entry>
+<entry key="HOST_MKE T30">3.7.25.30</entry>
+<entry key="HOST_MKE T31">3.7.25.31</entry>
+<entry key="HOST_MKE T32">3.7.25.32</entry>
+<entry key="HOST_MKE T33">3.7.25.33</entry>
+<entry key="HOST_MKE T34">3.7.25.34</entry>
+<entry key="HOST_MKE T35">3.7.25.35</entry>
+<entry key="HOST_MKE T36">3.7.25.36</entry>
+<entry key="HOST_MKE T37">3.7.25.37</entry>
+<entry key="HOST_MKE T38">3.7.25.38</entry>
+<entry key="HOST_MKE T39">3.7.25.39</entry>
+<entry key="HOST_MKE T40">3.7.25.40</entry>
+<entry key="HOST_MKE T41">3.7.25.41</entry>
+<entry key="HOST_MKE T42">3.7.25.42</entry>
+<entry key="HOST_MKE T43">3.7.25.43</entry>
+<entry key="HOST_MKE T44">3.7.25.44</entry>
+<entry key="HOST_MKE T45">3.7.25.45</entry>
+<entry key="HOST_MKE T46">3.7.25.46</entry>
+<entry key="HOST_MKE T47">3.7.25.47</entry>
+<entry key="HOST_MKE T48">3.7.25.48</entry>
+<entry key="HOST_MKE T49">3.7.25.49</entry>
+<entry key="HOST_MKE T50">3.7.25.50</entry>
+<entry key="HOST_MKE T51">3.7.25.51</entry>
+<entry key="HOST_MKE T52">3.7.25.52</entry>
+<entry key="HOST_MKE T53">3.7.25.53</entry>
+<entry key="HOST_MKE T54">3.7.25.54</entry>
+<entry key="HOST_MKE T55">3.7.25.55</entry>
+<entry key="HOST_MKE T56">3.7.25.56</entry>
+<entry key="HOST_MKE T57">3.7.25.57</entry>
+<entry key="HOST_MKE T58">3.7.25.58</entry>
+<entry key="HOST_MKE T59">3.7.25.59</entry>
+</properties>

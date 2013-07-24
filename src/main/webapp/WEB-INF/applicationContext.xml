@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+
+
+
+	<!--this is graphical log related beans -->
+	<!-- <bean id="graphicLogService" class="graphicallog.service.GraphicalLogServiceImp"></bean> 
+		<bean id="graphicalLog" scope="prototype" class="graphicallog.action.GraphicalLogAction"> 
+		<property name="graphicalLog" ref="graphicLogService" /> </bean> -->
+
+	<!--this is telnet related beans -->
+	<!-- <bean id="adminService" class="telnet.service.AdminServiceImp"></bean> 
+		<bean id="telnetAdminAction" class="telnet.action.TelnetAdminAction"> <property 
+		name="adminService" ref="adminService" /> </bean> <bean id="loginAction" 
+		class="telnet.action.LoginAction"></bean> <bean id="authenticaction" class="login.interceptor.AuthenticationInterceptor"></bean> 
+		<bean id="listVisitorDao" class="telnet.dao.ListVisitorDao"></bean> <bean 
+		id="listVisitorAction" class="telnet.action.ListVisitorAction"> <property 
+		name="listVisitorDao" ref="listVisitorDao" /> </bean> <bean id="telnetService" 
+		class="telnet.service.TelnetServiceDbImp" scope="prototype"></bean> <bean 
+		id="telnetAction" class="telnet.action.TelnetAction"> <property name="telnetService" 
+		ref="telnetService" /> </bean> -->
+
+	<!--this is hibernate related beans -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="MYSQL" />
+				<property name="showSql" value="false" />
+				<property name="generateDdl" value="true"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/test" />
+		<property name="username" value="root" />
+		<property name="password" value="operator" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:component-scan base-package="telnet,graphicallog" />
+	<jpa:repositories base-package="telnet, graphicallog"
+		entity-manager-factory-ref="entityManagerFactory"
+		transaction-manager-ref="transactionManager" />
+
+</beans>

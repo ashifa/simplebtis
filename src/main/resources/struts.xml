@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="false" />
+
+	<package name="myweb" namespace="/" extends="struts-default">
+
+
+		<interceptors>
+			<interceptor name="authentication"
+				class="login.interceptor.AuthenticationInterceptor" />
+
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="authentication" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="tokenSession" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="defaultStack" />
+
+		<default-action-ref name="index" />
+
+		<global-results>
+			<result name="error">/Error.jsp</result>
+			<result name="invalid.token">/Error.jsp</result>
+			<result name="login" type="redirectAction">loginAction</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="graphicalLogAction" class="graphicallog.action.GraphicalLogAction">
+			<result>/LogViewer.jsp</result>
+			<result name="invalid.token">/Error.jsp</result>
+			<!-- <interceptor-ref name="myStack" /> -->
+		</action>
+
+		<action name="telnetAction_*" class="telnet.action.TelnetAction"
+			method="{1}">
+			<result>/Telnet.jsp</result>
+			<result name="input">/Telnet.jsp</result>
+		</action>
+
+		<!-- <action name="onlineQuery" class="telnet.action.TelnetAction" method="onlineQuery"> 
+			<result>/Telnet.jsp</result> <result name="input">/Telnet.jsp</result> </action> -->
+
+		<action name="telnetAdminAction_*" class="telnet.action.TelnetAdminAction" method="{1}">
+			<result>/TelnetAdmin.jsp</result>
+			<result name="input">/Test.jsp</result>
+			<interceptor-ref name="adminStack" />
+		</action>
+
+<!-- 		<action name="telnetAdminActionRemove" class="telnet.action.TelnetAdminAction"
+			method="remove">
+			<result>/TelnetAdmin.jsp</result>
+			<interceptor-ref name="adminStack" />
+		</action>
+		<action name="telnetAdminActionEdit" class="telnet.action.TelnetAdminAction"
+			method="edit">
+			<result name="input">/Test.jsp</result>
+			<result>/TelnetAdmin.jsp</result>
+			<interceptor-ref name="adminStack" />
+		</action> -->
+		<action name="listVisitorAction" class="telnet.action.ListVisitorAction">
+			<result>/ListVisitor.jsp</result>
+		</action>
+		<action name="loginAction_*" class="telnet.action.LoginAction"
+			method="{1}">
+			<result type="redirectAction">telnetAdminAction</result>
+			<result name="input">/Login.jsp</result>
+		</action>
+	</package>
+
+
+</struts>
